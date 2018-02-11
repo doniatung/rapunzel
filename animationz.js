@@ -33,7 +33,7 @@ var place = function(e){
 //draw function
 var drawDot = function(x, y, r){
   ctx.beginPath();
-  //ctx.clearRect(0, 0, c.width, c.height);
+  ctx.clearRect(0, 0, c.width, c.height);
   ctx.arc(x, y, r, 0, 2 * Math.PI);
   ctx.fillStyle = "red";
   ctx.fill();
