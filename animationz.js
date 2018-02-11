@@ -42,6 +42,7 @@ var drawDot = function(x, y, r){
 
 var assign = function(e){
     counter = !counter;
+    //window.cancelAnimationFrame(id);
     window.requestAnimationFrame(grownshrink);
 }
 
@@ -51,15 +52,22 @@ var grownshrink = function(){
     drawDot(x, y, size)
   }
   else{
-    size --;
-    drawDot(x, y, size)
+    if (size > 5){
+      size --;
+      drawDot(x, y, size)
+    }
+    else{
+      counter = !counter;
+      size ++;
+      drawDot(x, y, size);
+    }
   }
+  window.cancelAnimationFrame(id);
   id = window.requestAnimationFrame(grownshrink);
   console.log(id);
 }
 
-var dvdX = 150;
-var dvdY = 300;
+
 var multX = 1;
 var multY = 1;
 
@@ -83,7 +91,7 @@ var dvd = function(){
 
     x += speed * multX;
     y += speed * multY;
-
+    //window.cancelAnimationFrame(id2);
     id2 = window.requestAnimationFrame(dvd);
 }
 
