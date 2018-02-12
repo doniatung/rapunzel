@@ -48,8 +48,15 @@ var assign = function(e){
 
 var grownshrink = function(){
   if (counter){
-    size ++;
-    drawDot(x, y, size)
+    if (size < 300){
+      size ++;
+      drawDot(x, y, size)
+    }
+    else{
+      counter = !counter;
+      size --;
+      drawDot(x, y, size);
+    }
   }
   else{
     if (size > 5){
@@ -70,23 +77,23 @@ var grownshrink = function(){
 
 var multX = 1;
 var multY = 1;
+var logo;
+
+var imageBuilder = function(){
+  logo = new Image();
+  logo.src = "dvdlogo.jpg";//PATH TO IMAGE FILE;
+}
 
 var dvd = function(){
+    imageBuilder();
     ctx.clearRect(0,0,600, 600)
-    ctx.beginPath();
-    ctx.arc(y, y, 30, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.stroke();
-    console.log(x);
-    console.log(y);
-    if(x <= 30 || x >= 570){
+    ctx.drawImage(logo, x, y, 100, 50);
+    if(x <= 0 || x >= 540){
         multX *= -1;
     }
-
-    if(y <= 30 || y >= 570){
+    if(y <= 0 || y >= 540){
         multY *= -1;
     }
-
     var speed = 4;
 
     x += speed * multX;
@@ -97,12 +104,8 @@ var dvd = function(){
 
 //clear function
 var stop = function(e){
-  if (id){
     window.cancelAnimationFrame(id);
-  }
-  else{
     window.cancelAnimationFrame(id2)
-  }
 }
 
 //adding event listenera
